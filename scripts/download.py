@@ -118,4 +118,4 @@ if __name__ == '__main__':
         )
 
         print('Saving to {}'.format(path))
-        users.to_csv(path)
+        users.to_csv(path, index=False)
