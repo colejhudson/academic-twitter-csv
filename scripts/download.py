@@ -73,6 +73,7 @@ class Twitter:
         return users
 
 if __name__ == '__main__':
+    from urllib import parse
     import pandas as pd
     import numpy as np
 
@@ -89,7 +90,6 @@ if __name__ == '__main__':
     }
 
     for domain, username in accounts.items():
-        path = '{}.csv'.format(domain)
 
         print('Downloading followers.')
         account = Twitter(username, token)
@@ -109,6 +109,7 @@ if __name__ == '__main__':
         # Remove useless columns
         users = users.drop(
             columns=[
+                'id_str',
                 'status',
                 'pinned_tweet_ids',
                 'pinned_tweet_ids_str',
@@ -116,6 +117,13 @@ if __name__ == '__main__':
                 'entities',
             ]        
         )
+
+        # Encode text to preserve csv formatting
+        users.description = users.description.apply(parse.quote)
+        users.location = users.location.apply(parse.quote)
+        users.name = users.name.apply(parse.quote)
+
+        path = '{}.csv'.format(domain)
 
         print('Saving to {}'.format(path))
         users.to_csv(path, index=False)
