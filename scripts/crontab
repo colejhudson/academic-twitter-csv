@@ -1,1 +1,1 @@
-* * * * * /usr/local/var/academic-twitter-csv/scripts/job
+* * * * * cd /usr/local/var/academic-twitter-csv && ./scripts/job

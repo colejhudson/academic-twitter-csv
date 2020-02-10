@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+export TWITTER_BEARER_TOKEN='your bearer token here'
 python3 /usr/local/bin/academic-twitter-scraper.py
 
 git add *.csv
 git commit --no-verify -m "uploaded on $(date)"
+git push origin master
